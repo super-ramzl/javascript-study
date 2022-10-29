@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div>
+            <div class="slide">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        
+        <button class="slide-1">1</button>
+        <button class="slide-2">2</button>
+        <button class="slide-3">3</button>
+        <button class="before">이전</button>
+        <button class="next">다음</button>
+        
+        <style>
+            div:first-child{
+                overflow:hidden;
+            }
+            .slide {
+                display: flex;
+                width:300vw;
+                transition: all 1s; 
+                
+            }
+
+            .slide div {
+                width: 100vw;
+                height:200px;
+            }
+
+            .slide div:first-child{
+                background-color:azure;
+            }
+            .slide div:nth-child(2){
+                background-color: beige;
+            }
+            .slide div:last-child{
+                background-color:darkgray
+            }
+        </style>
+
+        <script>
+            let slide = document.querySelector('.slide').style;
+            let count = 1;
+
+            function form(cost){
+                slide.transform='translateX('+ cost + 'vw)';
+            }
+            
+            function next() {
+                let now = Number(slide.transform.match(/[^a-zA-Z\(\)\-0]/g));
+                now +=1;
+                slide.transform = 'translateX(-'+ now + '00vw)';
+
+                if(document.querySelector('.slide').childElementCount==now+1){
+                    document.querySelector('.next').disabled = true;
+                }
+            }
+
+            function before(){
+                let now = Number(slide.transform.match(/[^a-zA-Z\(\)\-0]/g));
+                now = now-1;
+                slide.transform = 'translateX(-'+ now + '00vw)';
+
+                if(document.querySelector('.slide').childElementCount!=now+1){
+                    document.querySelector('.next').disabled = false;
+                }
+            }      
+            
+
+
+          
+
+            document.querySelector('.slide-1').addEventListener('click', () => form(0));
+            document.querySelector('.slide-2').addEventListener('click', () => form(-100));
+            document.querySelector('.slide-3').addEventListener('click', () => form(-200));
+            document.querySelector('.next').addEventListener('click', next);
+            document.querySelector('.before').addEventListener('click', before);
+  
+
+        </script>
+
+        
+    </body>
+</html>

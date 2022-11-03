@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+    </head>
+    <body>
+
+        <style>
+            ul.list {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              border-bottom: 1px solid #ccc;
+            }
+            ul.list::after {
+              content: '';
+              display: block;
+              clear: both;
+            }
+            .tab-button {
+              display: block;
+              padding: 10px 20px 10px 20px;
+              float: left;
+              margin-right: -1px;
+              margin-bottom: -1px;
+              color: grey;
+              text-decoration: none;
+              cursor: pointer;
+            }
+            .orange {
+              border-top: 2px solid orange;
+              border-right: 1px solid #ccc;
+              border-bottom: 1px solid white;
+              border-left: 1px solid #ccc;
+              color: black;
+              margin-top: -2px;
+            }
+            .tab-content {
+              display: none;
+              padding: 10px;
+            }
+            .show {
+              display: block;
+            }
+          </style>
+          
+          <div class="container mt-5">
+            <ul class="list">
+              <li class="tab-button">Products</li>
+              <li class="tab-button orange">Information</li>
+              <li class="tab-button">Shipping</li>
+            </ul>
+            <div class="tab-content">
+              <p>상품설명입니다. Product</p>
+            </div>
+            <div class="tab-content show">
+              <p>스펙설명입니다. Information</p>
+            </div>
+            <div class="tab-content">
+              <p>배송정보입니다. Shipping</p>
+            </div>
+          </div> 
+
+
+        <script>
+          const button = document.querySelectorAll('.tab-button');
+          const content = document.querySelectorAll('.tab-content');
+          const length = document.querySelectorAll('.list li').length;
+          
+          document.querySelector('.list').addEventListener('click', function(e){
+            for(let i=0; i<length; i++){
+                if(e.target == button[i]){
+                    for(let i=0; i<length; i++){
+                        button[i].classList.remove('orange');
+                        content[i].classList.remove('show');
+                    }
+                    button[i].classList.add('orange');
+                    content[i].classList.add('show');
+                } // 이벤트 버블링을 활용해서 이벤트 리스너 사용을 줄일 수 있음. (button을 클릭하면 .list도 같이 클릭되는
+                //버블링 현상을 활용)
+            }
+          });
+          
+
+          // 이벤트 리스너 사용할때마다 램 용량 차지 > 이벤트리스너 사용을 줄이면 램이 조금 여유로워짐 
+
+        </script>
+    </body>
+</html>

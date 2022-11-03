@@ -42,8 +42,53 @@
             .show {
               display: block;
             }
+
+            .card {
+                width: 90%;
+                height: 70px;
+                display:flex;
+                align-items: center;
+                border: solid 1px rgb(65, 65, 65, .5);
+                border-radius: 5px;
+                padding-left: 10px;
+            }
+
+            .container {
+                margin:30px 0 50px 0;
+               
+            }
+
+            .none {
+                display:none;
+            }
           </style>
+
+            <form class="container my-5 form-group">
+                <p>상품선택</p>
+
+                <select class="form-select mt-2">
+                    <option>모자</option>
+                    <option>셔츠</option>
+                </select>
+
+                <select class="form-select-color mt-2 none">
+                    <option>green</option>
+                    <option>black</option>
+                </select>
+
+                <select class="form-select-size mt-2 none">
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+            </form>
           
+          <div class="container mt-3">
+            <div class="card p-3">
+                상품명 / 가격
+            </div>
+          </div>
+
           <div class="container mt-5">
             <ul class="list">
               <li class="tab-button">Products</li>
@@ -60,6 +105,7 @@
               <p>배송정보입니다. Shipping</p>
             </div>
           </div> 
+          
 
 
         <script>
@@ -81,8 +127,37 @@
             }
           });
           
+          const ar = ['소나타', 50000, 'white'];
+          const ob = {name : '아반떼', price : [50000, 3000, 40000], color:'white'};
+          // array와 object의 차이점 : 둘다 하나의 변수에 여러가지 자료를 넣을 수 있는건 같으나
+          // array는 이름 없이 자료를 넣고, object는 'key' 값이라고 불리는 이름을 필수로 넣어줘야 자료를 넣을 수 있다. 
+          // 그렇기 때문에 object가 좀 더 값을 편리하게 이용할 수 있다. key값에 대응되는 값은 'value'라고 지칭한다.(아반떼, 50000, white 등)
+          // 이를 key:value 형태로 저장하는 자료형이라고 지칭한다. 
+          // array는 순서 개념이 있는 것에 반해 (인덱싱이 [0],[1],[2]... 라고 붙는 것을 보면)(순서가 존재하기 때문에
+          // array내 정렬이나 중간 자르기, 자료 검색, 맨앞/맨뒤 자료 추가 같은 것도 가능하다!)
+          // object는 순서 개념이 존재하지 않는다. 
+
+          //document.querySelector('.card').innerHTML =  `${thing[0]} / ${thing[1]} / ${thing[2]}`;
+          document.querySelector('.card').innerHTML =  `${ob.name} / ${ob.price[2]} / ${ob.color}`;
 
           // 이벤트 리스너 사용할때마다 램 용량 차지 > 이벤트리스너 사용을 줄이면 램이 조금 여유로워짐 
+
+       
+          const item = document.querySelectorAll('.form-select option');
+
+          document.querySelector('.form-select').addEventListener('change', function(){
+            if(document.querySelector('.form-select').value==item[0].innerHTML){
+                console.log(document.querySelector('.form-select').value);
+                document.querySelector('.form-select-size').classList.add('none')
+                document.querySelector('.form-select-color').classList.remove('none');
+            }else{
+                console.log(document.querySelector('.form-select').value);
+                document.querySelector('.form-select-color').classList.add('none');
+                document.querySelector('.form-select-size').classList.remove('none');
+            }
+          });
+          
+
 
         </script>
     </body>

@@ -6,7 +6,7 @@ const list = document.querySelectorAll('.list li').length; // .querySelectorAllë
 
 for(let i=0; i<list; i++){
     button[i].addEventListener('click', function(){ 
-        for(let i=0 ; i<3 ;  i++){
+        for(let i=0 ; i<list ;  i++){
             button[i].classList.remove('orange');
             content[i].classList.remove('show');
         }
